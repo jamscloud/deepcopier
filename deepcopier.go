@@ -110,6 +110,10 @@ func process(dst interface{}, src interface{}, args ...Options) error {
 			continue
 		}
 
+		for dstValue.Kind() == reflect.Ptr {
+			dstValue = dstValue.Elem()
+		}
+
 		var (
 			dstFieldType, dstFieldFound = dstValue.Type().FieldByName(dstFieldName)
 			dstFieldValue               = dstValue.FieldByName(dstFieldName)
