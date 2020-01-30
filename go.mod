@@ -1,4 +1,4 @@
-module github.com/ulule/deepcopier
+module github.com/smw-104/deepcopier 
 
 go 1.13
 
