@@ -285,7 +285,7 @@ func getRelatedField(instance interface{}, name string) (string, TagOptions) {
 		tagOptions TagOptions
 	)
 
-	if reflect.ValueOf(value).Kind() == reflect.Ptr {
+	for value.Kind() == reflect.Ptr {
 		value = value.Elem()
 	}
 
