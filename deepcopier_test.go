@@ -378,6 +378,11 @@ func TestField_NullTypes(t *testing.T) {
 			SQLNullBoolValidPtr   sql.NullBool
 			SQLNullBoolInvalid    sql.NullBool
 			SQLNullBoolInvalidPtr sql.NullBool
+
+			PtrSQLNullFloat64Valid      *sql.NullFloat64
+			PtrSQLNullFloat64ValidPtr   *sql.NullFloat64
+			PtrSQLNullFloat64Invalid    *sql.NullFloat64
+			PtrSQLNullFloat64InvalidPtr *sql.NullFloat64
 		}
 
 		SrcForce struct {
@@ -405,6 +410,11 @@ func TestField_NullTypes(t *testing.T) {
 			SQLNullBoolValidPtr   sql.NullBool `deepcopier:"force"`
 			SQLNullBoolInvalid    sql.NullBool `deepcopier:"force"`
 			SQLNullBoolInvalidPtr sql.NullBool `deepcopier:"force"`
+
+			PtrSQLNullFloat64Valid      *sql.NullFloat64 `deepcopier:"force"`
+			PtrSQLNullFloat64ValidPtr   *sql.NullFloat64 `deepcopier:"force"`
+			PtrSQLNullFloat64Invalid    *sql.NullFloat64 `deepcopier:"force"`
+			PtrSQLNullFloat64InvalidPtr *sql.NullFloat64 `deepcopier:"force"`
 		}
 
 		Dst struct {
@@ -432,6 +442,11 @@ func TestField_NullTypes(t *testing.T) {
 			SQLNullBoolValidPtr   *bool
 			SQLNullBoolInvalid    bool
 			SQLNullBoolInvalidPtr *bool
+
+			PtrSQLNullFloat64Valid      float64
+			PtrSQLNullFloat64ValidPtr   *float64
+			PtrSQLNullFloat64Invalid    float64
+			PtrSQLNullFloat64InvalidPtr *float64
 		}
 
 		DstForce struct {
@@ -459,6 +474,11 @@ func TestField_NullTypes(t *testing.T) {
 			SQLNullBoolValidPtr   *bool `deepcopier:"force"`
 			SQLNullBoolInvalid    bool  `deepcopier:"force"`
 			SQLNullBoolInvalidPtr *bool `deepcopier:"force"`
+
+			PtrSQLNullFloat64Valid      float64  `deepcopier:"force"`
+			PtrSQLNullFloat64ValidPtr   *float64 `deepcopier:"force"`
+			PtrSQLNullFloat64Invalid    float64  `deepcopier:"force"`
+			PtrSQLNullFloat64InvalidPtr *float64 `deepcopier:"force"`
 		}
 	)
 
@@ -489,6 +509,11 @@ func TestField_NullTypes(t *testing.T) {
 		SQLNullBoolValidPtr:   sql.NullBool{Valid: true, Bool: true},
 		SQLNullBoolInvalid:    sql.NullBool{Valid: false, Bool: true},
 		SQLNullBoolInvalidPtr: sql.NullBool{Valid: false, Bool: true},
+
+		PtrSQLNullFloat64Valid:      &sql.NullFloat64{Valid: true, Float64: 1},
+		PtrSQLNullFloat64ValidPtr:   &sql.NullFloat64{Valid: true, Float64: 1},
+		PtrSQLNullFloat64Invalid:    &sql.NullFloat64{Valid: false, Float64: 1},
+		PtrSQLNullFloat64InvalidPtr: &sql.NullFloat64{Valid: false, Float64: 1},
 	}
 
 	srcForce := &SrcForce{
@@ -516,6 +541,11 @@ func TestField_NullTypes(t *testing.T) {
 		SQLNullBoolValidPtr:   sql.NullBool{Valid: true, Bool: true},
 		SQLNullBoolInvalid:    sql.NullBool{Valid: false, Bool: true},
 		SQLNullBoolInvalidPtr: sql.NullBool{Valid: false, Bool: true},
+
+		PtrSQLNullFloat64Valid:      &sql.NullFloat64{Valid: true, Float64: 1},
+		PtrSQLNullFloat64ValidPtr:   &sql.NullFloat64{Valid: true, Float64: 1},
+		PtrSQLNullFloat64Invalid:    &sql.NullFloat64{Valid: false, Float64: 1},
+		PtrSQLNullFloat64InvalidPtr: &sql.NullFloat64{Valid: false, Float64: 1},
 	}
 
 	//
@@ -550,6 +580,10 @@ func TestField_NullTypes(t *testing.T) {
 	assert.Zero(t, dst.SQLNullBoolInvalid)
 	assert.Nil(t, dst.SQLNullBoolInvalidPtr)
 
+	assert.Zero(t, dst.PtrSQLNullFloat64Valid)
+	assert.Nil(t, dst.PtrSQLNullFloat64ValidPtr)
+	assert.Zero(t, dst.PtrSQLNullFloat64Invalid)
+	assert.Nil(t, dst.PtrSQLNullFloat64InvalidPtr)
 	//
 	// With force
 	//
@@ -586,6 +620,12 @@ func TestField_NullTypes(t *testing.T) {
 	assert.Equal(t, srcForce.SQLNullBoolValidPtr.Bool, *dstForce.SQLNullBoolValidPtr)
 	assert.Zero(t, dstForce.SQLNullBoolInvalid)
 	assert.Nil(t, dstForce.SQLNullBoolInvalidPtr)
+
+	assert.Equal(t, srcForce.PtrSQLNullFloat64Valid.Float64, dstForce.PtrSQLNullFloat64Valid)
+	assert.NotNil(t, dstForce.PtrSQLNullFloat64ValidPtr)
+	assert.Equal(t, srcForce.PtrSQLNullFloat64ValidPtr.Float64, *dstForce.PtrSQLNullFloat64ValidPtr)
+	assert.Zero(t, dstForce.PtrSQLNullFloat64Invalid)
+	assert.Nil(t, dstForce.PtrSQLNullFloat64InvalidPtr)
 }
 
 func TestField_SameNameWithDifferentType(t *testing.T) {

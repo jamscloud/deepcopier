@@ -293,8 +293,10 @@ func getRelatedField(instance interface{}, name string) (string, TagOptions) {
 		)
 
 		if tField.Type.Kind() == reflect.Struct && tField.Anonymous {
-			if n, o := getRelatedField(vField.Interface(), name); n != "" {
-				return n, o
+			if vField.CanInterface() {
+				if n, o := getRelatedField(vField.Interface(), name); n != "" {
+					return n, o
+				}
 			}
 		}
 
