@@ -1,4 +1,4 @@
-module github.com/smw-104/deepcopier
+module github.com/jamscloud/deepcopier
 
 go 1.13
 
